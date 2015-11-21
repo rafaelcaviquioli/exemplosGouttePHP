@@ -1,0 +1,13 @@
+{
+    "name": "palestra/exemplo1",
+    "description": "Exemplo 1",
+    "authors": [
+        {
+            "name": "Rafael Caviquioli",
+            "email": "rafaelcitj@gmail.com"
+        }
+    ],
+    "require": {
+        "fabpot/goutte": "^3.1"
+    }
+}
