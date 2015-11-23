@@ -1,6 +1,9 @@
 {
     "name": "palestra/exemplo1",
     "description": "Exemplo 1",
+    "autoload": {
+        "psr-0": { "": "classes/" }
+    },
     "authors": [
         {
             "name": "Rafael Caviquioli",
