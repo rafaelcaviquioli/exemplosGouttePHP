@@ -45,35 +45,22 @@
     				<strong>3. </strong>Web Crawler navega por cada página do site procurando por links que contenham o produto desejado, ao atingir o número máximo de itens encontrados o sistema exibe os itens na tela.<br />
     			</p>
     		</div>
-        <div class="row">
-          <form action="exemplo3.php" method="GET">
-              <div class="col-sm-8">
-                <input type="text" class="form-control input-sm col-sm-10" name="busca" placeholder="Buscar..." value="<?php echo empty($busca) ? null : $busca; ?>" />
-              </div>
-              <div class="col-sm-2">
-                <input type="number" class="form-control input-sm col-sm-10" name="limite" placeholder="Limite de resultados" value="<?php echo empty($limite) ? null : $limite; ?>" />
-              </div>
-              <div class="col-sm-2">
-                <button type="submit" class="btn btn-default">
-                  <i class="glyphicon glyphicon-search"></i>
-                </button>
-              </div>
-          </form>
-        </div>
-        <br />
+
         <?php if(count($resultados)){ ?>
         		<!-- Example row of columns -->
         		<div class="row">
               <?php foreach ($resultados as $resultado) { ?>
                 <div class="col-sm-4">
-                  <?php foreach ($resultado->imagens as $imagem) { ?>
+                  <?php foreach ($resultado['imagens'] as $imagem) { ?>
                     <div class="img-thumbnail">
                       <img src="<?php echo $imagem; ?>" />
                     </div>
                   <?php } ?>
                   <div class="col-lg-12">
-                  <h4><?php echo $resultado->titulo; ?></h4>
-                    <p><?php echo substr(implode("<br />", $resultado->descricao), 0, 5000); ?></p>
+                    <h4><?php echo $resultado['titulo']; ?></h4>
+                    <p><?php echo $resultado['de']; ?></p>
+                    <p><?php echo $resultado['por']; ?></p>
+                    <a href="<?php echo $resultado['link']; ?>" target="_blank">Visitar</a>
                   </div>
                 </div>
               <?php } ?>
