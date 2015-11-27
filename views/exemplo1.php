@@ -31,8 +31,6 @@
   					<li class="active"><a href="exemplo1.php">Exemplo 1</a></li>
   					<li><a href="exemplo2.php">Exemplo 2</a></li>
             <li><a href="exemplo3.php">Exemplo 3</a></li>
-  					<li><a href="#">Exemplo 4</a></li>
-  					<li><a href="#">Exemplo 5</a></li>
   				</ul>
   			</nav>
   		</div>

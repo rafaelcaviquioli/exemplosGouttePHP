@@ -13,9 +13,12 @@ class Exemplo3 extends WebCrawler{
 
 	private $form;
 
-    public function iniciar() {
+    public function iniciar($busca, $limite, $categoria) {
+
     	$contador = 0;
 
+        //Tratamento do termo de busca
+        $busca = self::retirarAcentos($busca);
 
 		$this->log = new \Log(self::LOG_FILE);
         $this->log->registrar("Iniciando...");
@@ -24,7 +27,7 @@ class Exemplo3 extends WebCrawler{
 
 		self::$URL = "http://www.americanas.com.br";
 
-        $this->adicionaLink(self::$URL);
+        $this->adicionaLink(empty($categoria) ? "http://www.americanas.com.br" : $categoria);
 
         $resultados = array();
         while ($this->getTotalLinksPendentes()) {
@@ -41,6 +44,9 @@ class Exemplo3 extends WebCrawler{
                     continue;
                 }
 
+                $this->linksProcessados[] = $link;
+
+
                 if ($totalLinks = $this->procurarLinks($crawler)) {
                     $this->log->registrar("Links encontrados: $totalLinks");
                 }
@@ -49,15 +55,26 @@ class Exemplo3 extends WebCrawler{
                 	$titulo = trim($crawler->filter('.mp-tit-name')->text());
                 	$valorDe = trim($crawler->filter('.mp-pb-from')->text());
                 	$valorAte = trim($crawler->filter('.mp-pb-to')->text());
-                	$imagens = trim($crawler->filter('[itemprop=thumbnail]')->each(function($node){
+                	$imagens = $crawler->filter('.sz')->each(function($node){
                 		return $node->attr("src");
-                	}));
-					var_dump($imagens);
-                	if(isset($titulo) AND isset($valorDe) AND isset($valorAte)){
-                		$resultados[] = array("titulo" => $titulo, "de" => $valorDe, "por" => $valorAte, "link" => $link, "imagens" => $imagens);
+                	});
+
+                	if(isset($titulo) AND isset($valorDe) AND isset($valorAte) AND strripos(self::retirarAcentos($titulo), $busca) !== false){
+                		$resultados[] = array(
+                            "titulo" => $titulo,
+                            "de" => $valorDe,
+                            "por" => $valorAte,
+                            "link" => $link,
+                            "imagens" => $imagens
+                        );
+
+                        $contador++;
+
+                        if($contador == $limite){
+                            return $resultados;
+                        }
                 	}
 
-                	$this->linksProcessados[] = $link;
                 } catch (Exception $e) {
                     $this->log->registrar($e->getMessage());
                 }
@@ -67,11 +84,6 @@ class Exemplo3 extends WebCrawler{
                 $this->log->registrar("Erro : " . $e->getMessage());
             }
 
-            $contador++;
-
-            if($contador == 2){
-            	return $resultados;
-            }
         }
     }
     protected function validaPrioridade($link){
