@@ -25,12 +25,12 @@
 
     	<div class="container">
     		<div class="masthead">
-    			<h3 class="text-muted">Notícias</h3>
+    			<h3 class="text-muted">Web Crawler Goutte PHP - <strong>Exemplo 2</strong></h3>
     			<nav>
     				<ul class="nav nav-justified">
-    					<li class="active"><a href="#">Exemplo 1</a></li>
-    					<li><a href="#">Exemplo 2</a></li>
-    					<li><a href="#">Exemplo 3</a></li>
+    					<li><a href="exemplo1.php">Exemplo 2</a></li>
+    					<li class="active"><a href="exemplo2.php">Exemplo 2</a></li>
+              <li><a href="exemplo3.php">Exemplo 3</a></li>
     					<li><a href="#">Exemplo 4</a></li>
     					<li><a href="#">Exemplo 5</a></li>
     				</ul>
@@ -58,24 +58,21 @@
               </div>
           </form>
         </div>
-        <?php if(count($resultados)){ ?>
+        <br />
+        <?php if(!is_null($resultado)){ ?>
       		<!-- Example row of columns -->
       		<div class="row">
-      		<?php foreach ($resultados as $resultado) { ?>
-      			<div class="col-lg-12">
-      				<h4><?php echo $resultado->titulo; ?></h4>
-              <p><?php echo substr($resultado->descricao, 0, 500); ?></p>
               <div class="col-sm-12">
               <?php foreach ($resultado->imagens as $imagem) { ?>
                 <div class="img-thumbnail">
                   <img src="<?php echo $imagem; ?>" />
                 </div>
               <?php } ?>
-              <p>
-              </p>
               </div>
+      			<div class="col-lg-12">
+      				<h4><?php echo $resultado->titulo; ?></h4>
+              <p><?php echo substr(implode("<br />", $resultado->descricao), 0, 5000); ?></p>
       			</div>
-      		<?php } ?>
       		</div>
         <?php } ?>
     	</div>

@@ -25,12 +25,12 @@
 
   	<div class="container">
   		<div class="masthead">
-  			<h3 class="text-muted">Notícias</h3>
+  			<h3 class="text-muted">Web Crawler Goutte PHP - <strong>Exemplo 1</strong></h3>
   			<nav>
   				<ul class="nav nav-justified">
-  					<li class="active"><a href="#">Exemplo 1</a></li>
-  					<li><a href="#">Exemplo 2</a></li>
-  					<li><a href="#">Exemplo 3</a></li>
+  					<li class="active"><a href="exemplo1.php">Exemplo 1</a></li>
+  					<li><a href="exemplo2.php">Exemplo 2</a></li>
+            <li><a href="exemplo3.php">Exemplo 3</a></li>
   					<li><a href="#">Exemplo 4</a></li>
   					<li><a href="#">Exemplo 5</a></li>
   				</ul>

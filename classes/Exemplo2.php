@@ -41,9 +41,11 @@ class Exemplo2 {
 		    return $node->attr('src');
 		});
 
-		$resultado->descricao = $crawler->filter("#mw-content-text > p")->text();
-		
-	
+		$resultado->descricao = $crawler->filter(".mw-content-ltr > p")->each(function ($node) {
+		    return $node->text();
+		});
+
+			
 		return $resultado;
 	}
 }
